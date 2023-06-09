@@ -105,6 +105,7 @@ const SignUp = () => {
                   </label>
                   <div className='mt-2.5'>
                     {/* TODO: confirm password- */}
+
                     <input
                       type='password'
                       {...register('password', {
@@ -116,6 +117,20 @@ const SignUp = () => {
                       placeholder='Enter your password'
                       className='block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md bg-gray-50 focus:outline-none focus:border-blue-600 focus:bg-white caret-blue-600'
                     />
+                    {errors.password?.type === 'required' && (
+                      <p className='text-red-600'>Password is required</p>
+                    )}
+                    {errors.password?.type === 'minLength' && (
+                      <p className='text-red-600'>
+                        Password minimum 6 characters
+                      </p>
+                    )}
+                    {errors.password?.type === 'pattern' && (
+                      <p className='text-red-600'>
+                        Your password should have at least: one Uppercase one
+                        lower case, one number and one special character.
+                      </p>
+                    )}
                   </div>
                 </div>
 

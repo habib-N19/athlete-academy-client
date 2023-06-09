@@ -33,7 +33,7 @@ const NavBar = () => {
           <label tabIndex={0} className='btn btn-ghost md:hidden'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
-              className='h-5 w-5'
+              className='w-5 h-5'
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
@@ -48,17 +48,17 @@ const NavBar = () => {
           </label>
           <ul
             tabIndex={0}
-            className='menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52'
+            className='p-2 mt-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52'
           >
             {navBarItems}
           </ul>
         </div>
-        <Link to='/' className='btn btn-ghost normal-case text-xl'>
+        <Link to='/' className='text-xl normal-case btn btn-ghost'>
           Athlete Academy
         </Link>
       </div>
-      <div className='navbar-center hidden md:flex'>
-        <ul className='menu menu-horizontal px-1'>{navBarItems}</ul>
+      <div className='hidden navbar-center md:flex'>
+        <ul className='px-1 menu menu-horizontal'>{navBarItems}</ul>
       </div>
       <div className='navbar-end'>
         {user && (
@@ -68,15 +68,15 @@ const NavBar = () => {
               className='btn btn-ghost btn-circle avatar] mr-4'
             >
               <div className='w-[40px] rounded-full ring ring-primary ring-offset-base-100 ring-offset-2'>
-                <img src={user.photoURL} className='rounded-full w-full' />
+                <img src={user.photoURL} className='w-full rounded-full' />
               </div>
             </label>
             <ul
               tabIndex={0}
-              className='menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 md:hidden'
+              className='p-2 mt-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 md:hidden'
             >
               <li>
-                <button onClick={handleLogOut} className='btn btn-secondary  '>
+                <button onClick={handleLogOut} className='btn btn-secondary '>
                   LogOut
                 </button>
               </li>
@@ -85,7 +85,8 @@ const NavBar = () => {
         )}
         {user ? (
           <>
-            <button onClick={handleLogOut} className='btn hidden md:flex'>
+            {/* TODO:explore react button */}
+            <button onClick={handleLogOut} className='hidden btn md:flex'>
               LogOut
             </button>
           </>

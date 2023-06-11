@@ -8,7 +8,7 @@ const Home = () => {
     <>
       <TopCarousel></TopCarousel>
       <TopClasses></TopClasses>
-      {/* <Instructors></Instructors> */}
+      <Instructors></Instructors>
     </>
   )
 }

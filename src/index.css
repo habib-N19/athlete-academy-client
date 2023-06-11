@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* .card_item {
+    @apply max-w-[400px] w-10 rounded p-3 hover: translate transform ease-in
+} */

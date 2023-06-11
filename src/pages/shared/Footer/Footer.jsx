@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <>
       {/* TODO:fix links of footer */}
-      <footer className='absolute inset-x-0 bottom-0 p-10 footer bg-base-200 text-base-content'>
+      <footer className='inset-x-0 bottom-0 p-10 footer bg-base-200 text-base-content'>
         <div>
           <span className='footer-title'>Services</span>
           <Link to='/' className='link link-hover'>
@@ -49,7 +49,7 @@ const Footer = () => {
           </Link>
         </div>
       </footer>
-      <footer className='absolute inset-x-0 px-10 py-4 border-t -bottom-10 footer bg-base-200 text-base-content border-base-300'>
+      <footer className='inset-x-0 px-10 py-4 border-t  -bottom-10 footer bg-base-200 text-base-content border-base-300'>
         <div className='items-center grid-flow-col'>
           <svg
             width='24'

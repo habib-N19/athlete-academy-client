@@ -2,13 +2,16 @@ import { createBrowserRouter } from 'react-router-dom'
 import Main from '../Layout/Main'
 import Login from '../pages/Authentication/Login'
 import SignUp from '../pages/Authentication/Signup'
-import Home from '../pages/Home/Home'
+import Home from '../pages/Home/Home/Home'
+import Instructors from '../pages/Instructors/Instructors'
+import Classes from '../pages/Classes/Classes'
+import Dashboard from '../Layout/Dashboard'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Main></Main>,
-    errorElement: <h4 className='text-center text-6xl'>Error</h4>,
+    errorElement: <h4 className='text-6xl text-center'>Error</h4>,
     children: [
       {
         path: '/',
@@ -21,8 +24,22 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignUp />
+      },
+      {
+        path: '/classes',
+        element: <Classes />
+      },
+      {
+        path: '/instructors',
+        element: <Instructors />
       }
     ]
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard></Dashboard>,
+    errorElement: <h2>error</h2>,
+    children: [{}]
   }
 ])
 

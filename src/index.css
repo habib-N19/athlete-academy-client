@@ -3,6 +3,19 @@
 @tailwind utilities;
 
 
+.active {
+    @apply py-3 px-4 inline-flex items-center gap-2 bg-white text-sm text-gray-700 font-medium rounded-md shadow-sm
+}
+
+/* TODO : use psuedo classes on @apply */
+/* .active {
+    @apply dark: bg-gray-800 dark:text-gray-400 @media screen {}
+} */
+
+.default {
+    @apply py-3 px-4 inline-flex items-center gap-2 bg-transparent text-sm text-gray-500 font-medium rounded-md
+}
+
 /* .card_item {
     @apply max-w-[400px] w-10 rounded p-3 hover: translate transform ease-in
 } */

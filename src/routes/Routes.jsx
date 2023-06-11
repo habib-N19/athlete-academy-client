@@ -3,9 +3,9 @@ import Main from '../Layout/Main'
 import Login from '../pages/Authentication/Login'
 import SignUp from '../pages/Authentication/Signup'
 import Home from '../pages/Home/Home/Home'
-import Instructors from '../pages/Instructors/Instructors'
-import Classes from '../pages/Classes/Classes'
+import Instructors from '../pages/Home/Instructors/Instructors'
 import Dashboard from '../Layout/Dashboard'
+import Classes from '../pages/Classes/Classes'
 
 const router = createBrowserRouter([
   {
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/classes',
-        element: <Classes />
+        element: <Classes></Classes>
       },
       {
         path: '/instructors',

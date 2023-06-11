@@ -14,7 +14,7 @@ const Instructors = () => {
     })
   ]
   useEffect(() => {
-    fetch('http://localhost:5000/classes')
+    fetch('http://localhost:5000/instructors')
       .then(res => res.json())
       .then(data => {
         setData(data.slice(0, 6))
@@ -28,10 +28,10 @@ const Instructors = () => {
       <Flicking circular={true} plugins={plugins}>
         {data.map(cardData => (
           <div
-            className='card-panel w-[400px] h-[300px] bg-white'
+            className='card-panel w-[400px] h-[300px] bg-white flex items-center justify-center text-black text-4xl'
             key={cardData._id}
           >
-            {cardData.Name}
+            {cardData.name}
           </div>
         ))}
       </Flicking>

@@ -5,11 +5,11 @@ import Footer from '../pages/shared/Footer/Footer'
 
 const Main = () => {
   return (
-    <div>
+    <>
       <NavBar></NavBar>
       <Outlet></Outlet>
       <Footer></Footer>
-    </div>
+    </>
   )
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import TopCarousel from '../topCarousel/TopCarousel'
-import Instructors from '../../Instructors/Instructors'
 import TopClasses from '../TopClasses/TopClasses'
+import Instructors from '../Instructors/Instructors'
 
 const Home = () => {
   return (

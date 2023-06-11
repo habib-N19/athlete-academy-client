@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import Flicking from '@egjs/react-flicking'
 import { AutoPlay, Perspective } from '@egjs/flicking-plugins'
 import '@egjs/react-flicking/dist/flicking.css'
-const Instructors = () => {
+
+const TopInstructors = () => {
   const [data, setData] = useState([])
   const plugins = [
     new Perspective({ rotate: 0.5 }),
@@ -40,4 +41,4 @@ const Instructors = () => {
   )
 }
 
-export default Instructors
+export default TopInstructors

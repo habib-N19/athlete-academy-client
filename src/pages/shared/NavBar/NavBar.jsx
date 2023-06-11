@@ -27,7 +27,8 @@ const NavBar = () => {
   )
 
   return (
-    <div className='fixed z-10 navbar bg-base-100'>
+    // TODO: fixing false margin
+    <div className='fixed z-10 mb-6 navbar bg-base-100'>
       <div className='navbar-start'>
         <div className='dropdown'>
           <label tabIndex={0} className='btn btn-ghost md:hidden'>

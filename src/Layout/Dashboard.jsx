@@ -4,9 +4,10 @@ import { NavLink, Outlet } from 'react-router-dom'
 const Dashboard = () => {
   return (
     <div className='flex w-full outline'>
-      <div class='flex outline-dashed'>
-        <div class='flex flex-col bg-gray-100 hover:bg-gray-200 rounded-lg transition p-1 dark:bg-gray-700 dark:hover:bg-gray-600'>
-          <nav class='flex flex-col space-x-2'>
+      <div className='flex mt-20 ml-6 outline-dashed'>
+        <div className='flex flex-col p-1 transition bg-gray-100 rounded-lg hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600'>
+          {/* TODO: tweak the nav size height  */}
+          <nav className='flex flex-col space-x-2 h-min'>
             <NavLink
               to='/dashboard/selectedClasses'
               className={({ isActive }) =>
@@ -60,7 +61,7 @@ const Dashboard = () => {
           </nav>
         </div>
       </div>
-      <div className='mx-auto'>
+      <div className='mx-auto '>
         <Outlet></Outlet>
       </div>
       {/* 2 */}

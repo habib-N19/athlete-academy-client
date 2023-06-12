@@ -1,97 +1,141 @@
 import React from 'react'
+import { useForm } from 'react-hook-form'
+import useAuth from '../../../../hooks/useAuth'
 
 const AddClass = () => {
+  const { user } = useAuth()
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      status: 'pending',
+      enrolled: 0
+    }
+  })
+  const onSubmit = data => {
+    // console.log('hi')
+    console.log(data)
+  }
+
   return (
     <div className='h-screen mx-auto text-center '>
       <h3 className='mt-6 text-4xl text-orange-400'>Add New Class</h3>
 
       {/* class form */}
-      <form className='p-16 mt-20 space-y-6 border border-red-500 shadow-2xl card'>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className='p-16 mt-20 space-y-6 border border-red-500 shadow-2xl card'
+      >
         <div>
-          <div className='rounded-md shadow-sm sm:flex '>
-            <span className='inline-flex items-center w-full px-4 py-3 -mt-px -ml-px text-sm text-gray-500 border border-gray-200 min-w-fit bg-gray-50 first:rounded-t-lg last:rounded-b-lg sm:w-auto sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400'>
-              Class Name
-            </span>
-            <input
-              type='text'
-              className='relative block w-full px-4 py-3 -mt-px -ml-px text-sm border-gray-200 rounded-lg shadow-sm md:mr-3 pr-11 first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
-            />
+          <div className='rounded-md shadow-sm md:space-x-3 sm:flex'>
+            <div className=''>
+              <div className='flex rounded-md shadow-sm'>
+                <div className='inline-flex items-center px-4 border border-r-0 border-gray-200 min-w-fit rounded-l-md bg-gray-50 dark:bg-gray-700 dark:border-gray-600'>
+                  <span className='text-sm text-gray-500 dark:text-gray-400'>
+                    Class Name
+                  </span>
+                </div>
 
-            <label htmlFor='file-input' className='sr-only'>
-              Choose Image
-            </label>
-            <input
-              type='file'
-              name='file-input'
-              id='file-input'
-              className='block w-full text-sm border border-gray-200 rounded-md shadow-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-gray-700 dark:file:text-gray-400'
-            />
+                <input
+                  type='text'
+                  {...register('className', { required: true })}
+                  name='className'
+                  className='block w-full px-4 py-3 text-sm border-gray-200 rounded-md rounded-l-none shadow-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
+                />
+              </div>
+              {errors.className && (
+                <span className='text-red-600'>Class Name is required</span>
+              )}
+            </div>
+            <div>
+              <div className='flex rounded-md shadow-sm'>
+                <input
+                  type='file'
+                  name='newClassPhoto'
+                  {...register('newClassPhoto', { required: true })}
+                  className='block w-full text-sm border border-gray-200 rounded-md shadow-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-gray-700 dark:file:text-gray-400'
+                />
+              </div>
+              {errors.newClassPhoto && (
+                <span className='text-red-600'>Photo is required</span>
+              )}
+            </div>
           </div>
         </div>
         <div>
           <div className='rounded-md shadow-sm md:space-x-3 sm:flex'>
             <input
               type='text'
-              class='opacity-70 pointer-events-none py-3 px-4 block w-full bg-gray-50 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
-              defaultValue='Instructors Name'
-              disabled
+              name='instructorName'
+              {...register('instructorName', { required: true })}
+              className='block w-full px-4 py-3 text-sm border-gray-200 rounded-md pointer-events-none opacity-70 bg-gray-50 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
+              defaultValue={user.displayName}
               readOnly
             />
             <input
-              type='text'
-              class='opacity-70 pointer-events-none py-3 px-4 block w-full bg-gray-50 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
-              defaultValue='Instructors Email'
-              disabled
-              readonly
+              type='email'
+              name='instructorEmail'
+              {...register('instructorEmail', { required: true })}
+              className='block w-full px-4 py-3 text-sm border-gray-200 rounded-md pointer-events-none opacity-70 bg-gray-50 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
+              defaultValue={user.email}
+              readOnly
             />
           </div>
         </div>
         <div>
           <div className='rounded-md shadow-sm md:space-x-3 sm:flex'>
             <div className=''>
-              <label for='hs-leading-multiple-add-on' class='sr-only'>
-                Multiple add-on
-              </label>
-              <div class='flex rounded-md shadow-sm'>
-                <div class='px-4 inline-flex items-center min-w-fit rounded-l-md border border-r-0 border-gray-200 bg-gray-50 dark:bg-gray-700 dark:border-gray-600'>
-                  <span class='text-sm text-gray-500 dark:text-gray-400'>
+              <div className='flex rounded-md shadow-sm'>
+                <div className='inline-flex items-center px-4 border border-r-0 border-gray-200 min-w-fit rounded-l-md bg-gray-50 dark:bg-gray-700 dark:border-gray-600'>
+                  <span className='text-sm text-gray-500 dark:text-gray-400'>
                     Available Seat
                   </span>
                 </div>
 
                 <input
                   type='number'
-                  id='hs-leading-multiple-add-on'
-                  name='inline-add-on'
-                  class='py-3 px-4 block w-full border-gray-200 shadow-sm rounded-md rounded-l-none text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
+                  {...register('seatAmount', { required: true })}
+                  name='seatAmount'
+                  className='block w-full px-4 py-3 text-sm border-gray-200 rounded-md rounded-l-none shadow-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
                 />
               </div>
+              {errors.seatAmount && (
+                <span className='text-red-600'>Seat amount is required</span>
+              )}
             </div>
             <div>
-              <label for='hs-leading-multiple-add-on' class='sr-only'>
-                Multiple add-on
-              </label>
-              <div class='flex rounded-md shadow-sm'>
-                <div class='px-4 inline-flex items-center min-w-fit rounded-l-md border border-r-0 border-gray-200 bg-gray-50 dark:bg-gray-700 dark:border-gray-600'>
-                  <span class='text-sm text-gray-500 dark:text-gray-400'>
+              <div className='flex rounded-md shadow-sm'>
+                <div className='inline-flex items-center px-4 border border-r-0 border-gray-200 min-w-fit rounded-l-md bg-gray-50 dark:bg-gray-700 dark:border-gray-600'>
+                  <span className='text-sm text-gray-500 dark:text-gray-400'>
                     Price
                   </span>
                 </div>
-                <div class='px-4 inline-flex items-center min-w-fit border border-r-0 border-gray-200 bg-gray-50 dark:bg-gray-700 dark:border-gray-600'>
-                  <span class='text-sm text-gray-500 dark:text-gray-400'>
+                <div className='inline-flex items-center px-4 border border-r-0 border-gray-200 min-w-fit bg-gray-50 dark:bg-gray-700 dark:border-gray-600'>
+                  <span className='text-sm text-gray-500 dark:text-gray-400'>
                     $
                   </span>
                 </div>
                 <input
                   type='number'
-                  id='hs-leading-multiple-add-on'
-                  name='inline-add-on'
-                  class='py-3 px-4 block w-full border-gray-200 shadow-sm rounded-md rounded-l-none text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
+                  {...register('price', { required: true })}
+                  name='price'
+                  className='block w-full px-4 py-3 text-sm border-gray-200 rounded-md rounded-l-none shadow-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
                 />
               </div>
+              {errors.price && (
+                <span className='text-red-600'>Price is required</span>
+              )}
             </div>
           </div>
         </div>
+        <input
+          type='submit'
+          className='inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-gray-800 transition-all border-2 border-gray-900 rounded-md btn hover:text-white hover:bg-gray-800 hover:border-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 dark:hover:bg-gray-900 dark:border-gray-900 dark:hover:border-gray-900 dark:text-white dark:focus:ring-gray-900 dark:focus:ring-offset-gray-800'
+          value='Add New Class'
+        />
       </form>
     </div>
   )

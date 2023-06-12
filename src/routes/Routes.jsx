@@ -13,6 +13,8 @@ import AddClass from '../pages/Dashboard/Instructor/AddClass/AddClass'
 import MyClasses from '../pages/Dashboard/Instructor/MyClasses/MyClasses'
 import ManageClasses from '../pages/Dashboard/Admin/ManageClasses/ManageClasses'
 import ManageUsers from '../pages/Dashboard/Admin/ManageUsers/ManageUsers'
+import PrivateRoute from './PrivateRoute'
+import UpdateClass from '../pages/Dashboard/Instructor/MyClasses/UpdateClass'
 
 const router = createBrowserRouter([
   {
@@ -57,11 +59,21 @@ const router = createBrowserRouter([
       },
       {
         path: 'addClass',
-        element: <AddClass></AddClass>
+        element: (
+          <PrivateRoute>
+            <AddClass></AddClass>
+          </PrivateRoute>
+        )
       },
       {
         path: 'myClasses',
-        element: <MyClasses></MyClasses>
+        element: <MyClasses></MyClasses>,
+        children: [
+          {
+            path: '/updateClass/:id',
+            element: <UpdateClass></UpdateClass>
+          }
+        ]
       },
       {
         path: 'manageClasses',

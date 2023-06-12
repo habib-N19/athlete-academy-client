@@ -8,9 +8,9 @@ const ManageClasses = () => {
       <div class='flex flex-col'>
         <div class='-m-1.5 overflow-x-auto'>
           <div class='p-1.5 min-w-full inline-block align-middle'>
-            <div class='border overflow-hidden dark:border-gray-700'>
+            <div class='border shadow overflow-hidden dark:border-gray-700'>
               <table class='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
-                <thead>
+                <thead class='bg-gray-50 dark:bg-gray-700'>
                   <tr class='divide-x divide-gray-200 dark:divide-gray-700'>
                     <th
                       scope='col'

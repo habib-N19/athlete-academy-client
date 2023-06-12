@@ -80,6 +80,7 @@ const Classes = () => {
                         Available Seat: {cd.AvailableSeats}
                       </p>
                     </div>
+                    {/* TODO:make this button private */}
                     <button
                       onClick={() => {
                         handleAddToCart(cd)

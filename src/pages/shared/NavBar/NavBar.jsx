@@ -8,6 +8,7 @@ const NavBar = () => {
   const { user, logOut } = useAuth()
   const [cart] = useCart()
   console.log(cart.length)
+  console.log(cart)
 
   const handleLogOut = () => {
     logOut()

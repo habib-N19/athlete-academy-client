@@ -69,7 +69,12 @@ const NavBar = () => {
               className='btn btn-ghost btn-circle avatar] mr-4'
             >
               <div className='w-[40px] rounded-full ring ring-primary ring-offset-base-100 ring-offset-2'>
-                <img src={user.photoURL} className='w-full rounded-full' />
+                {/* issue:1- can not resolve async operation to update the display image when logging with email and pass */}
+                <img
+                  src={user.photoURL}
+                  className='w-full rounded-full'
+                  alt='profile_img'
+                />
               </div>
             </label>
             <ul

@@ -23,7 +23,7 @@ const SignUp = () => {
         const loggedUser = result.user
         console.log(loggedUser)
         // sending updated info to db
-        updateUserInfo(data.name, data.photoURL).then(() => {
+        updateUserInfo(data.name, data.photo).then(() => {
           // updateUserInfo updates only the firebase information, so later if i need the photo url to show user pic i can do that! but newUser will be stored at db to show users info as needed.! two things to do two completely separate thing.
           const newUser = {
             name: data.name,

@@ -2,6 +2,7 @@ import React from 'react'
 import useCart from '../../../../hooks/useCart'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { Link } from 'react-router-dom'
 
 const SelectedClasses = () => {
   const [cart, refetch] = useCart()
@@ -57,6 +58,14 @@ const SelectedClasses = () => {
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
                         Price: $ {ctItem.price}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
+                        <Link
+                          className='btn btn-outline'
+                          to='/dashboard/payClass'
+                        >
+                          Buy Course
+                        </Link>
                       </td>
 
                       <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>

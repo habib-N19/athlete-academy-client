@@ -15,6 +15,7 @@ import ManageClasses from '../pages/Dashboard/Admin/ManageClasses/ManageClasses'
 import ManageUsers from '../pages/Dashboard/Admin/ManageUsers/ManageUsers'
 import PrivateRoute from './PrivateRoute'
 import UpdateClass from '../pages/Dashboard/Instructor/MyClasses/UpdateClass'
+import Payment from '../pages/Dashboard/Student/Payment/Payment'
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: 'enrolled',
         element: <EnrolledClasses></EnrolledClasses>
+      },
+      {
+        path: 'payClass',
+        element: <Payment></Payment>
       },
       {
         path: 'addClass',

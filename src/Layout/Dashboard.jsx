@@ -1,4 +1,13 @@
 import React from 'react'
+import {
+  FaHome,
+  FaCheckCircle,
+  FaCog,
+  FaUsersCog,
+  FaPlusCircle
+} from 'react-icons/fa'
+import { AiOutlineUser, AiFillStar } from 'react-icons/ai'
+// import { RiUserGroupLine } from 'react-icons/ri'
 import { NavLink, Outlet } from 'react-router-dom'
 
 const Dashboard = () => {
@@ -16,7 +25,7 @@ const Dashboard = () => {
                   : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
               }
             >
-              Home
+              <FaHome></FaHome> Home
             </NavLink>
             <NavLink
               to='/dashboard/selectedClasses'
@@ -26,7 +35,7 @@ const Dashboard = () => {
                   : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
               }
             >
-              My Selected Classes
+              <FaCheckCircle></FaCheckCircle> My Selected Classes
             </NavLink>
             <NavLink
               to='/dashboard/enrolled'
@@ -36,7 +45,7 @@ const Dashboard = () => {
                   : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
               }
             >
-              Enrolled Classes
+              <AiFillStar /> Enrolled Classes
             </NavLink>
             <NavLink
               to='/dashboard/myClasses'
@@ -46,7 +55,7 @@ const Dashboard = () => {
                   : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
               }
             >
-              My Classes
+              <AiOutlineUser /> My Classes
             </NavLink>
             <NavLink
               to='/dashboard/addClass'
@@ -56,7 +65,7 @@ const Dashboard = () => {
                   : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
               }
             >
-              Add Class
+              <FaPlusCircle /> Add Class
             </NavLink>
             <NavLink
               to='/dashboard/manageUsers'
@@ -66,7 +75,7 @@ const Dashboard = () => {
                   : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
               }
             >
-              manageUsers
+              <FaUsersCog></FaUsersCog> Manage Users
             </NavLink>
             <NavLink
               to='/dashboard/manageClasses'
@@ -76,7 +85,7 @@ const Dashboard = () => {
                   : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
               }
             >
-              manageClasses
+              <FaCog /> Manage Classes
             </NavLink>
           </nav>
         </div>

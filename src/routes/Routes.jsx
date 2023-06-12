@@ -70,7 +70,7 @@ const router = createBrowserRouter([
         element: <MyClasses></MyClasses>,
         children: [
           {
-            path: '/updateClass/:id',
+            path: 'updateClass',
             element: <UpdateClass></UpdateClass>
           }
         ]

@@ -2,6 +2,15 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const MyClasses = () => {
+  // TODO: use Axios
+  // TODO:use react query
+  const handleUpdate = id => {
+    console.log(id)
+  }
+  const handleDelete = id => {
+    console.log(id)
+  }
+
   return (
     <div className='h-screen mt-20'>
       {/* table data */}
@@ -31,9 +40,12 @@ const MyClasses = () => {
                       Total Enrolled: 30
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
+                      {/* TODO: make modal to update */}
                       <Link
-                        to={`/dashboard/myClasses/updateClass/${_id}`}
+                        // to={`/dashboard/myClasses/updateClass/${_id}`}
+                        to='/dashboard/myClasses/updateClass'
                         className='text-blue-500 hover:text-blue-700'
+                        // handleUpdate={handleUpdate}
                       >
                         Update
                       </Link>

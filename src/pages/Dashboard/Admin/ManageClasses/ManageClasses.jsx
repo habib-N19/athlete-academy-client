@@ -1,6 +1,8 @@
 import React from 'react'
 import { FaCheckCircle, FaClock, FaTimesCircle } from 'react-icons/fa'
+import useClasses from '../../../../hooks/useClasses'
 const ManageClasses = () => {
+  const [classData] = useClasses()
   return (
     <div>
       manage Classes
@@ -30,12 +32,12 @@ const ManageClasses = () => {
                     >
                       Instructor
                     </th>
-                    <th
+                    {/* <th
                       scope='col'
                       className='px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase'
                     >
                       Email
-                    </th>
+                    </th> */}
                     <th
                       scope='col'
                       className='px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase'
@@ -63,58 +65,60 @@ const ManageClasses = () => {
                   </tr>
                 </thead>
                 <tbody className='divide-y divide-gray-200 dark:divide-gray-700'>
-                  <tr>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
-                      Image
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
-                      BasketBall
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
-                      John Wick
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
-                      john@pistol.com
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
-                      40
-                    </td>
+                  {classData.map(cd => (
+                    <tr key={cd._id}>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
+                        <img src={cd.photo} alt='' />
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
+                        {cd.name}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
+                        {cd.instructor}
+                      </td>
+                      {/* <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
+                        {cd?.Email || 'none'}
+                      </td> */}
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
+                        {cd.availableSeats}
+                      </td>
 
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
-                      $ 66
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
-                      Status
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-center text-sm font-medium'>
-                      {/* <a className='text-blue-500 hover:text-blue-700' href='#'>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
+                        ${cd.price}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
+                        {cd.status}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-center text-sm font-medium'>
+                        {/* <a className='text-blue-500 hover:text-blue-700' href='#'>
                         Delete
                       </a> */}
-                      <div className='inline-flex rounded-md shadow-sm '>
-                        <button
-                          type='button'
-                          title='Approved'
-                          className='hover:scale-110 py-3 px-4 inline-flex justify-center items-center gap-2 -ml-px first:rounded-l-lg first:ml-0 last:rounded-r-lg border font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400'
-                        >
-                          <FaCheckCircle></FaCheckCircle>
-                        </button>
-                        <button
-                          type='button'
-                          title='Pending'
-                          className='hover:scale-110 py-3 px-4 inline-flex justify-center items-center gap-2 -ml-px first:rounded-l-lg first:ml-0 last:rounded-r-lg border font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:z-10 focus:outline-none focus:rounded focus:ring-2 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400'
-                        >
-                          <FaClock />
-                        </button>
-                        <button
-                          type='button'
-                          title='Denied'
-                          className='hover:scale-110 py-3 px-4 inline-flex justify-center items-center gap-2 -ml-px first:rounded-l-lg first:ml-0 last:rounded-r-lg border font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400'
-                        >
-                          <FaTimesCircle />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
+                        <div className='inline-flex rounded-md shadow-sm '>
+                          <button
+                            type='button'
+                            title='Approved'
+                            className='hover:scale-110 py-3 px-4 inline-flex justify-center items-center gap-2 -ml-px first:rounded-l-lg first:ml-0 last:rounded-r-lg border font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400'
+                          >
+                            <FaCheckCircle></FaCheckCircle>
+                          </button>
+                          <button
+                            type='button'
+                            title='Pending'
+                            className='hover:scale-110 py-3 px-4 inline-flex justify-center items-center gap-2 -ml-px first:rounded-l-lg first:ml-0 last:rounded-r-lg border font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:z-10 focus:outline-none focus:rounded focus:ring-2 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400'
+                          >
+                            <FaClock />
+                          </button>
+                          <button
+                            type='button'
+                            title='Denied'
+                            className='hover:scale-110 py-3 px-4 inline-flex justify-center items-center gap-2 -ml-px first:rounded-l-lg first:ml-0 last:rounded-r-lg border font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400'
+                          >
+                            <FaTimesCircle />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

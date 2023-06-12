@@ -4,9 +4,11 @@ import useClasses from '../../hooks/useClasses'
 import useAuth from '../../hooks/useAuth'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import useCart from '../../hooks/useCart'
 
 const Classes = () => {
   const [classData] = useClasses()
+  const [, refetch] = useCart()
   const { user } = useAuth()
   // console.log(classData)
   // {
@@ -18,8 +20,8 @@ const Classes = () => {
   // }
 
   // sending selected item to server and also to save on local storage
-  const handleAddToCart = classData => {
-    console.log(classData)
+  const handleAddToCart = cd => {
+    console.log(cd)
     if (user && user.email) {
       const cartItem = {
         email: user.email,
@@ -33,7 +35,7 @@ const Classes = () => {
         const data = res.data
         console.log(data)
         if (data.insertedId) {
-          // refetch()
+          refetch()
           Swal.fire({
             position: 'top-end',
             icon: 'success',

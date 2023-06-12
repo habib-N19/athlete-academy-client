@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 import useAuth from '../../../hooks/useAuth'
 import { Link } from 'react-router-dom'
+import useCart from '../../../hooks/useCart'
+import { FaShoppingCart } from 'react-icons/fa'
 
 const NavBar = () => {
   const { user, logOut } = useAuth()
+  const [cart] = useCart()
+  console.log(cart.length)
+
   const handleLogOut = () => {
     logOut()
       .then()
@@ -19,6 +24,11 @@ const NavBar = () => {
       </li>
       <li>
         <Link to='/classes'>Classes</Link>
+      </li>
+      <li>
+        <Link to='/dashboard/selectedClasses'>
+          <FaShoppingCart /> Cart {cart.length}
+        </Link>
       </li>
       <li>
         <Link to='/dashboard'>Dashboard</Link>

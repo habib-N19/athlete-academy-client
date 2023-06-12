@@ -7,7 +7,8 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signOut
+  signOut,
+  updateProfile
 } from 'firebase/auth'
 
 export const AuthContext = createContext(null)
@@ -38,6 +39,13 @@ const AuthProvider = ({ children }) => {
     setLoading(true)
     return signOut(auth)
   }
+  // updating user info and sending it to server
+  const updateUserInfo = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo
+    })
+  }
   //   adding a monitor for auth state change
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
@@ -55,6 +63,7 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     createUser,
+    updateUserInfo,
     signIn,
     googleSignIn,
     logOut

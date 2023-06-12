@@ -1,12 +1,15 @@
 import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useAuth from '../../hooks/useAuth'
 import { Helmet } from 'react-helmet-async'
 import SocialLogin from '../shared/SocialLogin/SocialLogin'
+import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const SignUp = () => {
-  const { createUser } = useAuth()
+  const { createUser, updateUserInfo } = useAuth()
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -19,7 +22,36 @@ const SignUp = () => {
       .then(result => {
         const loggedUser = result.user
         console.log(loggedUser)
+        // sending updated info to db
+        updateUserInfo(data.name, data.photoURL).then(() => {
+          // updateUserInfo updates only the firebase information, so later if i need the photo url to show user pic i can do that! but newUser will be stored at db to show users info as needed.! two things to do two completely separate thing.
+          const newUser = {
+            name: data.name,
+            email: data.email,
+            photo: data.photo,
+            role: 'student'
+          }
+          console.log(newUser)
+          axios
+            .post('http://localhost:5000/users', newUser)
+            .then(res => {
+              const data = res.data
+              if (data.insertedId) {
+                reset()
+                Swal.fire({
+                  position: 'top-start',
+                  icon: 'success',
+                  title: 'Account created Successfully!',
+                  showConfirmButton: false,
+                  timer: 1200
+                })
+                navigate('/')
+              }
+            })
+            .catch(error => console.error(error))
+        })
       })
+
       .catch(error => console.error(error))
   }
   return (

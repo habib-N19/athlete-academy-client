@@ -39,18 +39,23 @@ const AddClass = () => {
       instructor: instructorName,
       email: instructorEmail
     }
-    axios.post('http://localhost:5000/addNew', newClass).then(data => {
-      if (data.data.insertedId) {
-        reset()
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Class added for review',
-          showConfirmButton: false,
-          timer: 1500
-        })
-      }
-    })
+    axios
+      .post(
+        ' https://sports-summer-camp-server-side-habib-n19.vercel.app/addNew',
+        newClass
+      )
+      .then(data => {
+        if (data.data.insertedId) {
+          reset()
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Class added for review',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+      })
   }
 
   return (

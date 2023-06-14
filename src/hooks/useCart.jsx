@@ -10,7 +10,7 @@ const useCart = () => {
     enabled: !loading,
     queryFn: async () => {
       const response = await axios.get(
-        `http://localhost:5000/carts?email=${user?.email}`
+        ` https://sports-summer-camp-server-side-habib-n19.vercel.app/carts?email=${user?.email}`
       )
 
       return response.data

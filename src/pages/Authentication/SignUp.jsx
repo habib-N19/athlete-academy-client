@@ -33,7 +33,10 @@ const SignUp = () => {
           }
           console.log(newUser)
           axios
-            .post('http://localhost:5000/users', newUser)
+            .post(
+              ' https://sports-summer-camp-server-side-habib-n19.vercel.app/users',
+              newUser
+            )
             .then(res => {
               const data = res.data
               if (data.insertedId) {

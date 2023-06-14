@@ -17,15 +17,23 @@ const ManageClasses = () => {
       status: 'approved',
       instructorEmail: email
     }
-    axios.post('http://localhost:5000/classes').then(res => {
-      const data = res.data
-      console.log(data.insertedId)
-      axios.patch(`http://localhost:5000/pending/${cd._id}`).then(res => {
+    axios
+      .post(
+        ' https://sports-summer-camp-server-side-habib-n19.vercel.app/classes'
+      )
+      .then(res => {
         const data = res.data
-        console.log(data)
-        refetch()
+        console.log(data.insertedId)
+        axios
+          .patch(
+            ` https://sports-summer-camp-server-side-habib-n19.vercel.app/pending/${cd._id}`
+          )
+          .then(res => {
+            const data = res.data
+            console.log(data)
+            refetch()
+          })
       })
-    })
   }
 
   return (

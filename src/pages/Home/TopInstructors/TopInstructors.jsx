@@ -29,10 +29,13 @@ const TopInstructors = () => {
       <Flicking circular={true} plugins={plugins}>
         {data.map(cardData => (
           <div
-            className='card-panel w-[400px] h-[300px] bg-white flex items-center justify-center text-black text-4xl'
+            className='card-panel w-[400px] h-[300px] bg-white flex flex-col items-center justify-center text-black text-4xl'
             key={cardData._id}
           >
-            {cardData.name}
+            <img src=''></img>
+
+            <h2>Name:{cardData.name}</h2>
+            <p>Num of class Taken: {cardData.number_of_classes_taken}</p>
           </div>
         ))}
       </Flicking>

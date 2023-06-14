@@ -64,7 +64,7 @@ const Classes = () => {
             {/* dumb me !! couldn't run a map over an array! because i was using class word! now after one hour i know it is a stored word for js!! */}
             {classData.map(cd => (
               <div
-                className='border shadow-xl rounded transition transform hover:scale-105'
+                className='border shadow-xl h-[600px] rounded transition transform hover:scale-105'
                 key={cd._id}
               >
                 <div className='flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]'>

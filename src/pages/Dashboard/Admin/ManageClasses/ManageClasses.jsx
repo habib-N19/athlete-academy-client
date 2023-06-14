@@ -2,8 +2,31 @@ import React from 'react'
 import { FaCheckCircle, FaClock, FaTimesCircle } from 'react-icons/fa'
 import useClasses from '../../../../hooks/useClasses'
 import usePending from '../../../../hooks/usePending'
+import axios from 'axios'
 const ManageClasses = () => {
   const [pendingClasses, refetch] = usePending()
+  console.log(pendingClasses)
+  const handlePending = cd => {
+    console.log(cd)
+    const { name, instructor, price, seat, email } = cd
+    const newClass = {
+      name,
+      instructor,
+      price,
+      seat,
+      status: 'approved',
+      instructorEmail: email
+    }
+    axios.post('http://localhost:5000/classes').then(res => {
+      const data = res.data
+      console.log(data.insertedId)
+      axios.patch(`http://localhost:5000/pending/${cd._id}`).then(res => {
+        const data = res.data
+        console.log(data)
+        refetch()
+      })
+    })
+  }
 
   return (
     <div>
@@ -67,7 +90,7 @@ const ManageClasses = () => {
                   </tr>
                 </thead>
                 <tbody className='divide-y divide-gray-200 dark:divide-gray-700'>
-                  {classData.map(cd => (
+                  {pendingClasses.map(cd => (
                     <tr key={cd._id}>
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
                         <img src={cd.photo} alt='' />
@@ -82,7 +105,7 @@ const ManageClasses = () => {
                         {cd?.Email || 'none'}
                       </td> */}
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
-                        {cd.availableSeats}
+                        {cd.seat}
                       </td>
 
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
@@ -96,20 +119,42 @@ const ManageClasses = () => {
                         Delete
                       </a> */}
                         <div className='inline-flex rounded-md shadow-sm '>
-                          <button
-                            type='button'
-                            title='Approved'
-                            className='hover:scale-110 py-3 px-4 inline-flex justify-center items-center gap-2 -ml-px first:rounded-l-lg first:ml-0 last:rounded-r-lg border font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400'
-                          >
-                            <FaCheckCircle></FaCheckCircle>
-                          </button>
-                          <button
-                            type='button'
-                            title='Pending'
-                            className='hover:scale-110 py-3 px-4 inline-flex justify-center items-center gap-2 -ml-px first:rounded-l-lg first:ml-0 last:rounded-r-lg border font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:z-10 focus:outline-none focus:rounded focus:ring-2 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400'
-                          >
-                            <FaClock />
-                          </button>
+                          {cd.status == 'pending' ? (
+                            <button
+                              type='button'
+                              onClick={() => handlePending(cd)}
+                              title='Approve Class? '
+                              className='hover:scale-110 py-3 px-4 inline-flex justify-center items-center gap-2 -ml-px first:rounded-l-lg first:ml-0 last:rounded-r-lg border font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400'
+                            >
+                              <FaCheckCircle></FaCheckCircle>
+                            </button>
+                          ) : (
+                            <button
+                              type='button'
+                              title='Approved'
+                              className='hover:scale-110 py-3 px-4 inline-flex justify-center items-center gap-2 -ml-px first:rounded-l-lg first:ml-0 last:rounded-r-lg border font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400'
+                            >
+                              <FaCheckCircle className='text-orange-600'></FaCheckCircle>
+                            </button>
+                          )}
+                          {cd.status == 'pending' ? (
+                            <button
+                              type='button'
+                              title='Pending'
+                              className='hover:scale-110 py-3 px-4 inline-flex justify-center items-center gap-2 -ml-px first:rounded-l-lg first:ml-0 last:rounded-r-lg border font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:z-10 focus:outline-none focus:rounded focus:ring-2 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400'
+                            >
+                              <FaClock className='text-orange-600' />
+                            </button>
+                          ) : (
+                            <button
+                              type='button'
+                              disabled
+                              title='Pending'
+                              className='hover:scale-110 py-3 px-4 inline-flex justify-center items-center gap-2 -ml-px first:rounded-l-lg first:ml-0 last:rounded-r-lg border font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:z-10 focus:outline-none focus:rounded focus:ring-2 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400'
+                            >
+                              <FaClock />
+                            </button>
+                          )}
                           <button
                             type='button'
                             title='Denied'

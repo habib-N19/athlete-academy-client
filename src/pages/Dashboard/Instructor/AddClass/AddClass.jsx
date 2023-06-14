@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import useAuth from '../../../../hooks/useAuth'
 // import useAxiosSecure from '../../../../hooks/useAxiosSecure'
 import Swal from 'sweetalert2'
+import axios from 'axios'
 
 const AddClass = () => {
   const { user } = useAuth()
@@ -38,7 +39,7 @@ const AddClass = () => {
       instructor: instructorName,
       email: instructorEmail
     }
-    axios.post('/pending', newClass).then(data => {
+    axios.post('http://localhost:5000/addNew', newClass).then(data => {
       if (data.data.insertedId) {
         reset()
         Swal.fire({

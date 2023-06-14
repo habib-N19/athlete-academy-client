@@ -26,14 +26,19 @@ const NavBar = () => {
       <li>
         <Link to='/classes'>Classes</Link>
       </li>
-      <li>
-        <Link to='/dashboard/selectedClasses'>
-          <FaShoppingCart /> Cart {cart.length}
-        </Link>
-      </li>
-      <li>
-        <Link to='/dashboard'>Dashboard</Link>
-      </li>
+      {user && (
+        <>
+          {' '}
+          <li>
+            <Link to='/dashboard/selectedClasses'>
+              <FaShoppingCart /> Cart {cart.length}
+            </Link>
+          </li>
+          <li>
+            <Link to='/dashboard'>Dashboard</Link>
+          </li>
+        </>
+      )}
     </>
   )
 

@@ -1,9 +1,12 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import useAuth from '../../../../hooks/useAuth'
+// import useAxiosSecure from '../../../../hooks/useAxiosSecure'
+import Swal from 'sweetalert2'
 
 const AddClass = () => {
   const { user } = useAuth()
+  // const [axiosSecure] = useAxiosSecure()
   const {
     register,
     handleSubmit,
@@ -16,8 +19,37 @@ const AddClass = () => {
     }
   })
   const onSubmit = data => {
-    // console.log('hi')
     console.log(data)
+    const {
+      className,
+      price,
+      status,
+      enrolled,
+      seatAmount,
+      instructorName,
+      instructorEmail
+    } = data
+    const newClass = {
+      name: className,
+      price: parseFloat(price),
+      status,
+      enrolled,
+      seat: parseFloat(seatAmount),
+      instructor: instructorName,
+      email: instructorEmail
+    }
+    axios.post('/pending', newClass).then(data => {
+      if (data.data.insertedId) {
+        reset()
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Class added for review',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    })
   }
 
   return (

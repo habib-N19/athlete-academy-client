@@ -1,8 +1,10 @@
 import React from 'react'
 import { FaCheckCircle, FaClock, FaTimesCircle } from 'react-icons/fa'
 import useClasses from '../../../../hooks/useClasses'
+import usePending from '../../../../hooks/usePending'
 const ManageClasses = () => {
-  const [classData] = useClasses()
+  const [pendingClasses, refetch] = usePending()
+
   return (
     <div>
       manage Classes

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 
 const SelectedClasses = () => {
   const [cart, refetch] = useCart()
+  console.log(cart)
 
   // delete from cart
   const handleDelete = id => {

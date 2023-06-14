@@ -10,6 +10,7 @@ import {
   signOut,
   updateProfile
 } from 'firebase/auth'
+import axios from 'axios'
 
 export const AuthContext = createContext(null)
 
@@ -51,7 +52,15 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
       console.log('Current User', currentUser)
-      setLoading(false)
+      // sending jwt
+      if (currentUser) {
+        axios
+          .post('http://localhost:5000/jwt', { email: currentUser.email })
+          .then(data => {
+            localStorage.setItem('access-token', data.data.token)
+            setLoading(false)
+          })
+      }
     })
     return () => {
       return unsubscribe()

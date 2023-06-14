@@ -5,11 +5,16 @@ import useAuth from '../../hooks/useAuth'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import useCart from '../../hooks/useCart'
+import { useLocation, useNavigate } from 'react-router-dom'
+import useUsers from '../../hooks/useUsers'
 
 const Classes = () => {
   const [classData] = useClasses()
+  console.log(classData)
   const [, refetch] = useCart()
   const { user } = useAuth()
+  const location = useLocation()
+  const navigate = useNavigate()
   // console.log(classData)
   // {
   //   classData.map(classCard => console.log(classCard))
@@ -22,14 +27,15 @@ const Classes = () => {
   // sending selected item to server and also to save on local storage
   const handleAddToCart = cd => {
     console.log(cd)
+
     if (user && user.email) {
       const cartItem = {
         email: user.email,
         classId: cd._id,
-        name: cd.Name,
-        price: cd.Price,
-        seat: cd.AvailableSeats,
-        instructor: cd.Instructor
+        name: cd.name,
+        price: cd.price,
+        seat: cd.seat,
+        instructor: cd.instructor
       }
       axios.post('http://localhost:5000/carts', cartItem).then(res => {
         const data = res.data
@@ -45,6 +51,8 @@ const Classes = () => {
           })
         }
       })
+    } else {
+      navigate('/login', { state: { from: location } })
     }
   }
   return (
@@ -67,28 +75,38 @@ const Classes = () => {
                   /> */}
                   <div className='p-4 md:p-5'>
                     <h3 className='text-lg font-bold text-gray-800 dark:text-white'>
-                      {cd.Name}
+                      {cd.name}
                     </h3>
                     <p className='mt-1 text-gray-800 dark:text-gray-400'>
-                      {cd.Instructor}
+                      {cd.instructor}
                     </p>
                     <div className='flex justify-between'>
                       <p className='mt-5 text-lg font-semibold text-gray-500 dark:text-gray-500'>
                         Price: ${cd.Price}
                       </p>
                       <p className='mt-5 text-lg font-semibold text-gray-500 dark:text-gray-500'>
-                        Available Seat: {cd.AvailableSeats}
+                        Available Seat: {cd.seat}
                       </p>
                     </div>
                     {/* TODO:make this button private */}
-                    <button
-                      onClick={() => {
-                        handleAddToCart(cd)
-                      }}
-                      className='btn btn-success hover:btn-accent bottom mt-4'
-                    >
-                      Select Class
-                    </button>
+                    {cd.seat == 0 && (
+                      <button
+                        disabled
+                        className='btn btn-success hover:btn-accent bottom mt-4'
+                      >
+                        Select Class
+                      </button>
+                    )}
+                    {cd.seat !== 0 && (
+                      <button
+                        onClick={() => {
+                          handleAddToCart(cd)
+                        }}
+                        className='btn btn-success hover:btn-accent bottom mt-4'
+                      >
+                        Select Class
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

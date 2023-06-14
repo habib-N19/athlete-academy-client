@@ -3,45 +3,45 @@ import '@egjs/react-flicking/dist/flicking.css'
 import { AutoPlay } from '@egjs/flicking-plugins'
 import React, { useEffect, useState } from 'react'
 import image from '../../../../../pics/1.jpg'
+import useClasses from '../../../hooks/useClasses'
 const TopClasses = ({ horizontal = true }) => {
-  const [cardData, setCardData] = useState([])
   const plugins = [
     new AutoPlay({
-      duration: 200,
+      duration: 2000,
       direction: 'NEXT',
       stopOnHover: true
     })
   ]
   //   TODO:use axios and react query here
-  useEffect(() => {
-    fetch('http://localhost:5000/classes')
-      .then(res => res.json())
-      .then(data => {
-        setCardData(data.slice(0, 6))
-        console.log(data)
-      })
-  }, [])
+  const [classData] = useClasses()
   return (
     // TODO:change images,
-    <div className='w-10/12 h-[400px] mx-auto  bg-emerald-200'>
+    <div className='w-10/12 mx-auto mt-20'>
       {/* <h2 className='text-4xl text-center'>Top Classes</h2> */}
 
       <Flicking plugins={plugins} horizontal={horizontal} circular={true}>
-        {cardData.map(card => (
+        {classData.map(card => (
           <div
             key={card._id}
             // TODO:change bg animation transition
-            className='w-full h-[200px] card hover:bg-base-100 shadow-xl image-full transition transform hover:scale-110 hover:text-white'
+            className='w-full h-[400px] card hover:bg-base-100 shadow-xl image-full transition transform hover:scale-110 hover:text-white'
           >
             {/* TODO: change card info */}
             <figure>
-              <img src={image} className='w-full opacity-100' alt='Shoes' />
+              <img
+                src={card.photo}
+                className='w-full opacity-100'
+                alt='Shoes'
+              />
             </figure>
             {/* TODO: implement card with instructors image */}
-            <div className='card-body '>
-              <h2 className='card-title'>{card.Name}</h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div className='justify-end transition-opacity duration-300 opacity-0 card-actions hover:opacity-100'>
+            <div className='card-body mx-auto mt-20 '>
+              <h2 className='card-title dark:text-white text-2xl'>
+                {card.name}
+              </h2>
+              <p className='text-xl dark:text-white '>{card.instructor}</p>
+
+              <div className='justify-center transition-opacity duration-300  card-actions'>
                 <button className=' btn btn-primary'>Buy Now</button>
               </div>
             </div>

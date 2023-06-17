@@ -19,6 +19,7 @@ import Payment from '../pages/Dashboard/Student/Payment/Payment'
 import AdminRoute from './AdminRoute'
 import ErrorPageGeneral from '../pages/shared/ErrorPage/ErrorPageGeneral'
 import DashBoardErrorPage from '../pages/shared/ErrorPage/DashBoardErrorPage'
+import InstructorRoute from './InstructorRoute'
 
 const router = createBrowserRouter([
   {
@@ -56,7 +57,6 @@ const router = createBrowserRouter([
         <Dashboard></Dashboard>
       </PrivateRoute>
     ),
-    errorElement: <h2>error</h2>,
     children: [
       {
         path: 'selectedClasses',
@@ -72,11 +72,19 @@ const router = createBrowserRouter([
       },
       {
         path: 'addClass',
-        element: <AddClass></AddClass>
+        element: (
+          <InstructorRoute>
+            <AddClass></AddClass>
+          </InstructorRoute>
+        )
       },
       {
         path: 'myClasses',
-        element: <MyClasses></MyClasses>,
+        element: (
+          <InstructorRoute>
+            <MyClasses></MyClasses>
+          </InstructorRoute>
+        ),
         children: [
           {
             path: 'updateClass',

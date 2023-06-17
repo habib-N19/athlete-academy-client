@@ -10,9 +10,11 @@ import { AiOutlineUser, AiFillStar } from 'react-icons/ai'
 // import { RiUserGroupLine } from 'react-icons/ri'
 import { NavLink, Outlet } from 'react-router-dom'
 import useAdmin from '../hooks/useAdmin'
+import useInstructor from '../hooks/useInstructor'
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin()
+  const [isInstructor] = useInstructor()
   return (
     <div className=' flex w-full'>
       <div className='flex mt-20 ml-6 h-min sticky'>
@@ -31,26 +33,15 @@ const Dashboard = () => {
             </NavLink>
             {isAdmin ? (
               <>
-                {' '}
                 <NavLink
-                  to='/dashboard/myClasses'
+                  to='/dashboard/manageClasses'
                   className={({ isActive }) =>
                     isActive
                       ? 'active dark:bg-gray-800 dark:text-gray-400'
                       : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
                   }
                 >
-                  <AiOutlineUser /> My Classes
-                </NavLink>
-                <NavLink
-                  to='/dashboard/addClass'
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'active dark:bg-gray-800 dark:text-gray-400'
-                      : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
-                  }
-                >
-                  <FaPlusCircle /> Add Class
+                  <FaCog /> Manage Classes
                 </NavLink>
                 <NavLink
                   to='/dashboard/manageUsers'
@@ -61,16 +52,6 @@ const Dashboard = () => {
                   }
                 >
                   <FaUsersCog></FaUsersCog> Manage Users
-                </NavLink>
-                <NavLink
-                  to='/dashboard/manageClasses'
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'active dark:bg-gray-800 dark:text-gray-400'
-                      : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
-                  }
-                >
-                  <FaCog /> Manage Classes
                 </NavLink>
               </>
             ) : (
@@ -94,6 +75,30 @@ const Dashboard = () => {
                   }
                 >
                   <AiFillStar /> Enrolled Classes
+                </NavLink>
+              </>
+            )}
+            {isInstructor && (
+              <>
+                <NavLink
+                  to='/dashboard/myClasses'
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'active dark:bg-gray-800 dark:text-gray-400'
+                      : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
+                  }
+                >
+                  <AiOutlineUser /> My Classes
+                </NavLink>
+                <NavLink
+                  to='/dashboard/addClass'
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'active dark:bg-gray-800 dark:text-gray-400'
+                      : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
+                  }
+                >
+                  <FaPlusCircle /> Add Class
                 </NavLink>
               </>
             )}

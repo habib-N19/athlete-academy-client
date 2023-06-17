@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useAuth from '../../../hooks/useAuth'
 import { Link } from 'react-router-dom'
 import useCart from '../../../hooks/useCart'
 import { FaShoppingCart } from 'react-icons/fa'
 
 const NavBar = () => {
+  const [theme, setTheme] = useState(true)
   const { user, logOut } = useAuth()
   const [cart] = useCart()
   console.log(cart.length)
@@ -15,6 +16,15 @@ const NavBar = () => {
       .then()
       .catch(error => console.error(error))
   }
+  const handleThemeToggle = () => {
+    setTheme(!theme)
+  }
+
+  useEffect(() => {
+    document
+      .querySelector('html')
+      .setAttribute('data-theme', theme ? 'dark' : 'light')
+  }, [theme])
   const navBarItems = (
     <>
       <li>
@@ -105,6 +115,10 @@ const NavBar = () => {
             </ul>
           </div>
         )}
+        {/* change theme */}
+        <button className='btn btn-secondary' onClick={handleThemeToggle}>
+          Change theme
+        </button>
         {user ? (
           <>
             {/* TODO:explore react button */}

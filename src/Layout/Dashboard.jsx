@@ -31,7 +31,7 @@ const Dashboard = () => {
             >
               <FaHome></FaHome> Home
             </NavLink>
-            {isAdmin ? (
+            {isAdmin && (
               <>
                 <NavLink
                   to='/dashboard/manageClasses'
@@ -52,29 +52,6 @@ const Dashboard = () => {
                   }
                 >
                   <FaUsersCog></FaUsersCog> Manage Users
-                </NavLink>
-              </>
-            ) : (
-              <>
-                <NavLink
-                  to='/dashboard/selectedClasses'
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'active dark:bg-gray-800 dark:text-gray-400'
-                      : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
-                  }
-                >
-                  <FaCheckCircle></FaCheckCircle> My Selected Classes
-                </NavLink>
-                <NavLink
-                  to='/dashboard/enrolled'
-                  className={({ isActive }) =>
-                    isActive
-                      ? 'active dark:bg-gray-800 dark:text-gray-400'
-                      : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
-                  }
-                >
-                  <AiFillStar /> Enrolled Classes
                 </NavLink>
               </>
             )}
@@ -99,6 +76,30 @@ const Dashboard = () => {
                   }
                 >
                   <FaPlusCircle /> Add Class
+                </NavLink>
+              </>
+            )}
+            {!isAdmin && !isInstructor && (
+              <>
+                <NavLink
+                  to='/dashboard/selectedClasses'
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'active dark:bg-gray-800 dark:text-gray-400'
+                      : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
+                  }
+                >
+                  <FaCheckCircle></FaCheckCircle> My Selected Classes
+                </NavLink>
+                <NavLink
+                  to='/dashboard/enrolled'
+                  className={({ isActive }) =>
+                    isActive
+                      ? 'active dark:bg-gray-800 dark:text-gray-400'
+                      : 'default hover:text-gray-700 hover:hover:text-blue-600 dark:text-gray-400 dark:hover:text-white'
+                  }
+                >
+                  <AiFillStar /> Enrolled Classes
                 </NavLink>
               </>
             )}

@@ -19,11 +19,15 @@ const ManageClasses = () => {
       instructorEmail: email
     }
 
-    axios.patch(`http://localhost:5000/classes/${cd._id}`).then(res => {
-      const data = res.data
-      console.log(data)
-      refetch()
-    })
+    axios
+      .patch(
+        `https://sports-summer-camp-server-side-habib-n19.vercel.app/classes/${cd._id}`
+      )
+      .then(res => {
+        const data = res.data
+        console.log(data)
+        refetch()
+      })
   }
 
   return (

@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react'
 const Instructors = () => {
   const [cartData, setCardData] = useState([])
   useEffect(() => {
-    fetch(' http://localhost:5000/users/instructors')
+    fetch(
+      ' https://sports-summer-camp-server-side-habib-n19.vercel.app/users/instructors'
+    )
       .then(res => res.json())
       .then(data => {
         setCardData(data)

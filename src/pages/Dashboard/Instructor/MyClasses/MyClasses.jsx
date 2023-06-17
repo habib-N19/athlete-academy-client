@@ -11,7 +11,9 @@ const MyClasses = () => {
   // const[]
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/instructors/classes/${user.email}`)
+      .get(
+        `https://sports-summer-camp-server-side-habib-n19.vercel.app/instructors/classes/${user.email}`
+      )
       .then(res => {
         const data = res.data
         console.log(data)

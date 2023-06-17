@@ -37,20 +37,25 @@ const Classes = () => {
         seat: cd.seat,
         instructor: cd.instructor
       }
-      axios.post(' http://localhost:5000/carts', cartItem).then(res => {
-        const data = res.data
-        console.log(data)
-        if (data.insertedId) {
-          refetch()
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Class selected.',
-            showConfirmButton: false,
-            timer: 1500
-          })
-        }
-      })
+      axios
+        .post(
+          ' https://sports-summer-camp-server-side-habib-n19.vercel.app/carts',
+          cartItem
+        )
+        .then(res => {
+          const data = res.data
+          console.log(data)
+          if (data.insertedId) {
+            refetch()
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Class selected.',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          }
+        })
     } else {
       navigate('/login', { state: { from: location } })
     }

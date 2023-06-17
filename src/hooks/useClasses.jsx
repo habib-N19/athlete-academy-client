@@ -11,7 +11,9 @@ const useClasses = () => {
     queryKey: ['classData'],
     queryFn: async () => {
       // TODO: how to use common axios base url for non protected api end points!!
-      const res = await fetch('http://localhost:5000/classes')
+      const res = await fetch(
+        'https://sports-summer-camp-server-side-habib-n19.vercel.app/classes'
+      )
       // console.log(res)
       return res.json()
     }

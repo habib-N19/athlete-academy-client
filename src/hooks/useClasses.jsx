@@ -12,7 +12,7 @@ const useClasses = () => {
     queryFn: async () => {
       // TODO: how to use common axios base url for non protected api end points!!
       const res = await fetch('http://localhost:5000/classes')
-      console.log(res)
+      // console.log(res)
       return res.json()
     }
   })

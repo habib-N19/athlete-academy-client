@@ -7,12 +7,14 @@ import Swal from 'sweetalert2'
 
 const ManageUsers = () => {
   const [users, refetch] = useUsers()
+  console.log(users)
 
   const handleAdmin = user => {
     console.log(user)
     axios
+      // `https://sports-summer-camp-server-side-habib-n19.vercel.app/users/admin/${user._id}`
       .patch(
-        ` https://sports-summer-camp-server-side-habib-n19.vercel.app/users/admin/${user._id}`
+        `https://sports-summer-camp-server-side-habib-n19.vercel.app/users/admin/${user._id}`
       )
       .then(res => {
         const data = res.data
@@ -86,6 +88,12 @@ const ManageUsers = () => {
                       scope='col'
                       className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase'
                     >
+                      Image
+                    </th>
+                    <th
+                      scope='col'
+                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase'
+                    >
                       Role
                     </th>
                     <th
@@ -107,6 +115,16 @@ const ManageUsers = () => {
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
                         {user.email}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
+                        <div className='avatar'>
+                          <div className='mask mask-squircle w-12 h-12'>
+                            <img
+                              src={user?.photo}
+                              alt='Avatar Tailwind CSS Component'
+                            />
+                          </div>
+                        </div>
                       </td>
                       <td className='px-6 py-4 text-blue-500 hover:text-blue-700 whitespace-nowrap text-right text-sm font-medium uppercase'>
                         {user.role}

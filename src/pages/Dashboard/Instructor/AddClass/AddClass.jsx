@@ -28,6 +28,7 @@ const AddClass = () => {
       enrolled,
       seatAmount,
       instructorName,
+      newClassPhoto,
       instructorEmail
     } = data
     const newClass = {
@@ -35,15 +36,14 @@ const AddClass = () => {
       price: parseFloat(price),
       status,
       enrolled,
+      photo: newClassPhoto,
       seat: parseFloat(seatAmount),
       instructor: instructorName,
       email: instructorEmail
     }
     axios
-      .post(
-        ' https://sports-summer-camp-server-side-habib-n19.vercel.app/addNew',
-        newClass
-      )
+      // 'https://sports-summer-camp-server-side-habib-n19.vercel.app/addNew'
+      .post('http://localhost:5000/addNew', newClass)
       .then(data => {
         if (data.data.insertedId) {
           reset()
@@ -89,17 +89,24 @@ const AddClass = () => {
               )}
             </div>
             <div>
-              <div className='flex rounded-md shadow-sm'>
-                <input
-                  type='file'
-                  name='newClassPhoto'
-                  {...register('newClassPhoto', { required: true })}
-                  className='block w-full text-sm border border-gray-200 rounded-md shadow-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-gray-700 dark:file:text-gray-400'
-                />
+              <div>
+                <div className='flex rounded-md shadow-sm'>
+                  <div className='inline-flex items-center px-4 border border-r-0 border-gray-200 min-w-fit rounded-l-md bg-gray-50 dark:bg-gray-700 dark:border-gray-600'>
+                    <span className='text-sm text-gray-500 dark:text-gray-400'>
+                      Image Url
+                    </span>
+                  </div>
+                  <input
+                    type='text'
+                    name='newClassPhoto'
+                    {...register('newClassPhoto', { required: true })}
+                    className='block w-full text-sm border border-gray-200 rounded-md shadow-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 file:bg-transparent file:border-0 file:bg-gray-100 file:mr-4 file:py-3 file:px-4 dark:file:bg-gray-700 dark:file:text-gray-400'
+                  />
+                </div>
+                {errors.newClassPhoto && (
+                  <span className='text-red-600'>Photo is required</span>
+                )}
               </div>
-              {errors.newClassPhoto && (
-                <span className='text-red-600'>Photo is required</span>
-              )}
             </div>
           </div>
         </div>

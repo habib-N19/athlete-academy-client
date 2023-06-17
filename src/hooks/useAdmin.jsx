@@ -11,7 +11,7 @@ const useAdmin = () => {
     queryKey: ['isAdmin', user?.email],
     queryFn: async () => {
       const res = await axios.get(
-        ` https://sports-summer-camp-server-side-habib-n19.vercel.app/users/admin/${user?.email}`
+        ` http://localhost:5000/users/admin/${user?.email}`
       )
       return res.data.admin
     }

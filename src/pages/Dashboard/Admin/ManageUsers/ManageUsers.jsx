@@ -12,10 +12,7 @@ const ManageUsers = () => {
   const handleAdmin = user => {
     console.log(user)
     axios
-      // `https://sports-summer-camp-server-side-habib-n19.vercel.app/users/admin/${user._id}`
-      .patch(
-        `https://sports-summer-camp-server-side-habib-n19.vercel.app/users/admin/${user._id}`
-      )
+      .patch(`http://localhost:5000/users/admin/${user._id}`)
       .then(res => {
         const data = res.data
         console.log(data)
@@ -35,9 +32,7 @@ const ManageUsers = () => {
   }
   const handleInstructor = user => {
     axios
-      .patch(
-        ` https://sports-summer-camp-server-side-habib-n19.vercel.app/users/instructor/${user._id}`
-      )
+      .patch(`http://localhost:5000/users/instructor/${user._id}`)
       .then(res => {
         const data = res.data
         console.log(data)
@@ -76,6 +71,12 @@ const ManageUsers = () => {
                       scope='col'
                       className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase'
                     >
+                      Image
+                    </th>
+                    <th
+                      scope='col'
+                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase'
+                    >
                       Name
                     </th>
                     <th
@@ -84,12 +85,7 @@ const ManageUsers = () => {
                     >
                       Email
                     </th>
-                    <th
-                      scope='col'
-                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase'
-                    >
-                      Image
-                    </th>
+
                     <th
                       scope='col'
                       className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase'
@@ -111,12 +107,6 @@ const ManageUsers = () => {
                         {index + 1}
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
-                        {user.name}
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
-                        {user.email}
-                      </td>
-                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
                         <div className='avatar'>
                           <div className='mask mask-squircle w-12 h-12'>
                             <img
@@ -126,7 +116,14 @@ const ManageUsers = () => {
                           </div>
                         </div>
                       </td>
-                      <td className='px-6 py-4 text-blue-500 hover:text-blue-700 whitespace-nowrap text-right text-sm font-medium uppercase'>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
+                        {user.name}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
+                        {user.email}
+                      </td>
+
+                      <td className='px-6 py-4 text-blue-500 hover:text-blue-700 whitespace-nowrap text-left text-sm font-medium uppercase'>
                         {user.role}
                       </td>
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>

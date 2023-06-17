@@ -1,9 +1,23 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import useAuth from '../../../../hooks/useAuth'
 
 const MyClasses = () => {
+  const { user } = useAuth()
+  const [classes, setClasses] = useState([])
   // TODO: use Axios
   // TODO:use react query
+  // const[]
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/instructors/classes/${user.email}`)
+      .then(res => {
+        const data = res.data
+        console.log(data)
+        setClasses(data)
+      })
+  }, [classes])
   const handleUpdate = id => {
     console.log(id)
   }
@@ -23,42 +37,47 @@ const MyClasses = () => {
                   My Classes
                 </caption>
                 <tbody className='divide-y divide-gray-200 dark:divide-gray-700'>
-                  <tr className='hover:bg-gray-100 dark:hover:bg-gray-700'>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200'>
-                      Class Name
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
-                      Available Seat: 45
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
-                      Price: 40
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
-                      Status: Pending
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
-                      Total Enrolled: 30
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
-                      {/* TODO: make modal to update */}
-                      <Link
-                        // to={`/dashboard/myClasses/updateClass/${_id}`}
-                        to='/dashboard/myClasses/updateClass'
-                        className='text-blue-500 hover:text-blue-700'
-                        // handleUpdate={handleUpdate}
-                      >
-                        Update
-                      </Link>
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
-                      <button
-                        onClick={() => handleDelete(_id)}
-                        className='text-blue-500 hover:text-blue-700'
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
+                  {classes.map(c => (
+                    <tr
+                      key={c._id}
+                      className='hover:bg-gray-100 dark:hover:bg-gray-700'
+                    >
+                      <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-gray-200'>
+                        Class Name :{c.name}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
+                        Available Seat: {c.seat}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
+                        Price: {c.price}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
+                        Status: {c.status}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
+                        Total Enrolled: 30
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
+                        {/* TODO: make modal to update */}
+                        <Link
+                          // to={`/dashboard/myClasses/updateClass/${_id}`}
+                          to='/dashboard/myClasses/updateClass'
+                          className='text-blue-500 hover:text-blue-700'
+                          // handleUpdate={handleUpdate}
+                        >
+                          Update
+                        </Link>
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
+                        <button
+                          onClick={() => handleDelete(_id)}
+                          className='text-blue-500 hover:text-blue-700'
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

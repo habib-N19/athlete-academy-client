@@ -1,11 +1,13 @@
 import React from 'react'
 import { FaCheckCircle, FaClock, FaTimesCircle } from 'react-icons/fa'
 import useClasses from '../../../../hooks/useClasses'
-import usePending from '../../../../hooks/usePending'
+// import usePending from '../../../../hooks/usePending'
 import axios from 'axios'
 const ManageClasses = () => {
-  const [pendingClasses, refetch] = usePending()
-  console.log(pendingClasses)
+  // const [pendingClasses, refetch] = usePending()
+  // console.log(pendingClasses)
+  const [classData, , refetch] = useClasses()
+  console.log(classData)
   const handlePending = cd => {
     console.log(cd)
     const { name, instructor, price, seat, email } = cd
@@ -14,17 +16,13 @@ const ManageClasses = () => {
       instructor,
       price,
       seat,
-      status: 'approved',
       instructorEmail: email
     }
-    axios.post('http://localhost:5000/classes', newClass).then(res => {
+
+    axios.patch(`http://localhost:5000/classes/${cd._id}`).then(res => {
       const data = res.data
-      console.log(data.insertedId)
-      axios.patch(`http://localhost:5000/pending/${cd._id}`).then(res => {
-        const data = res.data
-        console.log(data)
-        refetch()
-      })
+      console.log(data)
+      refetch()
     })
   }
 
@@ -90,7 +88,7 @@ const ManageClasses = () => {
                   </tr>
                 </thead>
                 <tbody className='divide-y divide-gray-200 dark:divide-gray-700'>
-                  {pendingClasses.map(cd => (
+                  {classData.map(cd => (
                     <tr key={cd._id}>
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
                         <img src={cd.photo} alt='' />

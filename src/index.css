@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* * {
+    border: 2px solid red;
+} */
 
 .active {
     @apply py-3 px-4 inline-flex items-center gap-2 bg-white text-sm text-gray-700 font-medium rounded-md shadow-sm

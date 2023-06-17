@@ -3,9 +3,7 @@ import React, { useEffect, useState } from 'react'
 const Instructors = () => {
   const [cartData, setCardData] = useState([])
   useEffect(() => {
-    fetch(
-      ' https://sports-summer-camp-server-side-habib-n19.vercel.app/instructors'
-    )
+    fetch(' http://localhost:5000/users/instructors')
       .then(res => res.json())
       .then(data => {
         setCardData(data)
@@ -17,9 +15,9 @@ const Instructors = () => {
       {cartData.map(cData => (
         <div className='card w-[400px] border' key={cData._id}>
           <div className='card-body'>
-            <h3>Instructor Name: {cData.name}</h3>
-            <p>Num of class: {cData.number_of_classes_taken}</p>
-            <img src='' alt='' />
+            <img src={cData?.photo} alt='' />
+            <h3 className='font-bold'>Instructor Name: {cData.name}</h3>
+            {/* <p>Num of class: {cData?.number_of_classes_taken}</p> */}
           </div>
         </div>
       ))}

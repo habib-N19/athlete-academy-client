@@ -17,12 +17,14 @@ import PrivateRoute from './PrivateRoute'
 import UpdateClass from '../pages/Dashboard/Instructor/MyClasses/UpdateClass'
 import Payment from '../pages/Dashboard/Student/Payment/Payment'
 import AdminRoute from './AdminRoute'
+import ErrorPageGeneral from '../pages/shared/ErrorPage/ErrorPageGeneral'
+import DashBoardErrorPage from '../pages/shared/ErrorPage/DashBoardErrorPage'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Main></Main>,
-    errorElement: <h4 className='text-6xl text-center'>Error</h4>,
+    errorElement: <ErrorPageGeneral></ErrorPageGeneral>,
     children: [
       {
         path: '/',
@@ -48,6 +50,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
+    errorElement: <DashBoardErrorPage></DashBoardErrorPage>,
     element: (
       <PrivateRoute>
         <Dashboard></Dashboard>

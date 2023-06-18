@@ -15,9 +15,7 @@ const TopInstructors = () => {
     })
   ]
   useEffect(() => {
-    fetch(
-      'https://sports-summer-camp-server-side-habib-n19.vercel.app/users/instructors'
-    )
+    fetch('http://localhost:5000/users/instructors')
       .then(res => res.json())
       .then(data => {
         setData(data.slice(0, 6))

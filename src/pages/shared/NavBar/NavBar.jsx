@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react'
 import useAuth from '../../../hooks/useAuth'
 import { Link } from 'react-router-dom'
 import useCart from '../../../hooks/useCart'
+import { IoMdSunny, IoMdMoon } from 'react-icons/io'
 import { FaShoppingCart } from 'react-icons/fa'
+import useAdmin from '../../../hooks/useAdmin'
+import useInstructor from '../../../hooks/useInstructor'
 
 const NavBar = () => {
   const [theme, setTheme] = useState(true)
   const { user, logOut } = useAuth()
+  const [isAdmin] = useAdmin()
+  const [isInstructor] = useInstructor()
   const [cart] = useCart()
   console.log(cart.length)
   console.log(cart)
@@ -19,7 +24,6 @@ const NavBar = () => {
   const handleThemeToggle = () => {
     setTheme(!theme)
   }
-
   useEffect(() => {
     document
       .querySelector('html')
@@ -38,12 +42,13 @@ const NavBar = () => {
       </li>
       {user && (
         <>
-          {' '}
-          <li>
-            <Link to='/dashboard/selectedClasses'>
-              <FaShoppingCart /> Cart {cart.length}
-            </Link>
-          </li>
+          {!isAdmin && !isInstructor && (
+            <li>
+              <Link to='/dashboard/selectedClasses'>
+                <FaShoppingCart /> Cart {cart.length}
+              </Link>
+            </li>
+          )}
           <li>
             <Link to='/dashboard'>Dashboard</Link>
           </li>
@@ -54,7 +59,7 @@ const NavBar = () => {
 
   return (
     // TODO: fixing false margin
-    <div className='fixed z-10 mb-6 navbar bg-base-100'>
+    <div className='z-10 top-0 left-0 right-0 fixed navbar bg-base-100'>
       <div className='navbar-start'>
         <div className='dropdown'>
           <label tabIndex={0} className='btn btn-ghost md:hidden'>
@@ -115,10 +120,7 @@ const NavBar = () => {
             </ul>
           </div>
         )}
-        {/* change theme */}
-        <button className='btn btn-secondary' onClick={handleThemeToggle}>
-          Change theme
-        </button>
+
         {user ? (
           <>
             {/* TODO:explore react button */}
@@ -132,6 +134,15 @@ const NavBar = () => {
               Login
             </Link>
           </li>
+        )}
+        {theme ? (
+          <button className='px-4 mr-2' onClick={handleThemeToggle}>
+            <IoMdSunny></IoMdSunny>
+          </button>
+        ) : (
+          <button className='px-4 mr-2' onClick={handleThemeToggle}>
+            <IoMdMoon></IoMdMoon>
+          </button>
         )}
       </div>
     </div>

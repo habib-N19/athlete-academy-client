@@ -5,7 +5,7 @@ import Footer from '../pages/shared/Footer/Footer'
 
 const Main = () => {
   return (
-    <div>
+    <div className='relative'>
       <NavBar></NavBar>
       <Outlet></Outlet>
       <Footer></Footer>

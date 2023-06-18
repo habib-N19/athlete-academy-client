@@ -22,12 +22,9 @@ const SelectedClasses = () => {
     }).then(result => {
       if (result.isConfirmed) {
         // TODO: have to figure out how to use axios here!! tried but getting 404 error, most probably having async await issues!!
-        fetch(
-          `https://sports-summer-camp-server-side-habib-n19.vercel.app/carts/${id}`,
-          {
-            method: 'DELETE'
-          }
-        )
+        fetch(`http://localhost:5000/carts/${id}`, {
+          method: 'DELETE'
+        })
           .then(res => res.json())
           .then(data => {
             if (data.deletedCount > 0) {

@@ -7,22 +7,19 @@ import Swal from 'sweetalert2'
 import useCart from '../../hooks/useCart'
 import { useLocation, useNavigate } from 'react-router-dom'
 import useUsers from '../../hooks/useUsers'
+import useAdmin from '../../hooks/useAdmin'
+import useInstructor from '../../hooks/useInstructor'
 
 const Classes = () => {
   const [classData] = useClasses()
   console.log(classData)
   const [, refetch] = useCart()
+  const [isAdmin] = useAdmin()
+  const [isInstructor] = useInstructor()
   const { user } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
-  // console.log(classData)
-  // {
-  //   classData.map(classCard => console.log(classCard))
-  // }
-  // // if(classes){
-  // //   {class.map(className=>console.log(class))}
-
-  // }
+  console.log(isAdmin, isInstructor)
 
   // sending selected item to server and also to save on local storage
   const handleAddToCart = cd => {
@@ -37,25 +34,20 @@ const Classes = () => {
         seat: cd.seat,
         instructor: cd.instructor
       }
-      axios
-        .post(
-          ' https://sports-summer-camp-server-side-habib-n19.vercel.app/carts',
-          cartItem
-        )
-        .then(res => {
-          const data = res.data
-          console.log(data)
-          if (data.insertedId) {
-            refetch()
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'Class selected.',
-              showConfirmButton: false,
-              timer: 1500
-            })
-          }
-        })
+      axios.post(' http://localhost:5000/carts', cartItem).then(res => {
+        const data = res.data
+        console.log(data)
+        if (data.insertedId) {
+          refetch()
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Class selected.',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+      })
     } else {
       navigate('/login', { state: { from: location } })
     }
@@ -93,15 +85,11 @@ const Classes = () => {
                     Price: ${cd.price}
                   </div>
                 </div>
-                {cd.availableSeats == 0 && (
-                  <button
-                    disabled
-                    className='btn btn-success hover:btn-accent bottom mt-4'
-                  >
+                {cd.availableSeats == 0 || isAdmin || isInstructor ? (
+                  <button disabled className='btn btn-success bottom mt-4'>
                     Select Class
                   </button>
-                )}
-                {cd.availableSeats !== 0 && (
+                ) : (
                   <button
                     onClick={() => {
                       handleAddToCart(cd)
@@ -111,6 +99,16 @@ const Classes = () => {
                     Select Class
                   </button>
                 )}
+                {/* {cd.availableSeats !== 0 && (
+                  <button
+                    onClick={() => {
+                      handleAddToCart(cd)
+                    }}
+                    className='btn btn-success hover:btn-accent bottom mt-4'
+                  >
+                    Select Class
+                  </button>
+                )} */}
               </div>
             </div>
           ))}

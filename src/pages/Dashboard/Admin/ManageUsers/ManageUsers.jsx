@@ -12,9 +12,7 @@ const ManageUsers = () => {
   const handleAdmin = user => {
     console.log(user)
     axios
-      .patch(
-        `https://sports-summer-camp-server-side-habib-n19.vercel.app/users/admin/${user._id}`
-      )
+      .patch(`http://localhost:5000/users/admin/${user._id}`)
       .then(res => {
         const data = res.data
         console.log(data)
@@ -34,9 +32,7 @@ const ManageUsers = () => {
   }
   const handleInstructor = user => {
     axios
-      .patch(
-        `https://sports-summer-camp-server-side-habib-n19.vercel.app/users/instructor/${user._id}`
-      )
+      .patch(`http://localhost:5000/users/instructor/${user._id}`)
       .then(res => {
         const data = res.data
         console.log(data)

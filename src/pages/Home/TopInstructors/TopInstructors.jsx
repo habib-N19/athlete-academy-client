@@ -25,7 +25,7 @@ const TopInstructors = () => {
   return (
     <div>
       {/* TODO:customize the card, adding card info,  */}
-      All the instructors
+      <h3 className='text-center text-3xl mb-6'>Best Instructors</h3>
       <Flicking circular={true} plugins={plugins}>
         {data.map(cardData => (
           <div
@@ -39,7 +39,6 @@ const TopInstructors = () => {
           </div>
         ))}
       </Flicking>
-      ;
     </div>
   )
 }

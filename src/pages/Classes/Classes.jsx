@@ -99,16 +99,6 @@ const Classes = () => {
                     Select Class
                   </button>
                 )}
-                {/* {cd.availableSeats !== 0 && (
-                  <button
-                    onClick={() => {
-                      handleAddToCart(cd)
-                    }}
-                    className='btn btn-success hover:btn-accent bottom mt-4'
-                  >
-                    Select Class
-                  </button>
-                )} */}
               </div>
             </div>
           ))}

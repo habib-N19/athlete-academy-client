@@ -2,9 +2,17 @@ import Flicking from '@egjs/react-flicking'
 import '@egjs/react-flicking/dist/flicking.css'
 import { AutoPlay } from '@egjs/flicking-plugins'
 import React, { useEffect, useState } from 'react'
-import image from '../../../../../pics/1.jpg'
-import useClasses from '../../../hooks/useClasses'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 const TopClasses = ({ horizontal = true }) => {
+  const [classes, setClasses] = useState([])
+  useEffect(() => {
+    axios.get('http://localhost:5000/classes/top').then(res => {
+      const data = res.data
+      console.log(data)
+      setClasses(data)
+    })
+  }, [])
   const plugins = [
     new AutoPlay({
       duration: 2000,
@@ -12,15 +20,13 @@ const TopClasses = ({ horizontal = true }) => {
       stopOnHover: true
     })
   ]
-  //   TODO:use axios and react query here
-  const [classData] = useClasses()
   return (
     // TODO:change images,
-    <div className='w-10/12 mx-auto mt-20'>
-      {/* <h2 className='text-4xl text-center'>Top Classes</h2> */}
+    <div className='w-10/12 mx-auto my-20'>
+      <h2 className='text-4xl text-center mb-6'>Top Classes</h2>
 
       <Flicking plugins={plugins} horizontal={horizontal} circular={true}>
-        {classData.map(card => (
+        {classes.map(card => (
           <div
             key={card._id}
             // TODO:change bg animation transition
@@ -30,7 +36,7 @@ const TopClasses = ({ horizontal = true }) => {
             <figure>
               <img
                 src={card.photo}
-                className='w-full opacity-100'
+                className='w-full h-full object-cover opacity-100'
                 alt='Shoes'
               />
             </figure>
@@ -39,10 +45,14 @@ const TopClasses = ({ horizontal = true }) => {
               <h2 className='card-title dark:text-white text-2xl'>
                 {card.name}
               </h2>
-              <p className='text-xl dark:text-white '>{card.instructor}</p>
+              <p className='text-xl dark:text-white '>
+                Instructor: {card.instructor}
+              </p>
 
               <div className='justify-center transition-opacity duration-300  card-actions'>
-                <button className=' btn btn-primary'>Buy Now</button>
+                <Link to='/classes' className='btn btn-primary'>
+                  Buy Now
+                </Link>
               </div>
             </div>
           </div>

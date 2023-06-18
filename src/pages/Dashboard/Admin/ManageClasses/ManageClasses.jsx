@@ -3,26 +3,37 @@ import { FaCheckCircle, FaClock, FaTimesCircle } from 'react-icons/fa'
 import useClasses from '../../../../hooks/useClasses'
 // import usePending from '../../../../hooks/usePending'
 import axios from 'axios'
+import useAllClass from '../../../../hooks/useAllClass'
+import Swal from 'sweetalert2'
 const ManageClasses = () => {
   // const [pendingClasses, refetch] = usePending()
   // console.log(pendingClasses)
-  const [classData, , refetch] = useClasses()
-  console.log(classData)
+  const [allClass, , refetch] = useAllClass()
+  console.log(allClass)
   const handlePending = cd => {
     console.log(cd)
-    const { name, instructor, price, seat, email } = cd
-    const newClass = {
-      name,
-      instructor,
-      price,
-      seat,
-      instructorEmail: email
-    }
+    // const { name, instructor, price, seat, email } = cd
+    // const newClass = {
+    //   name,
+    //   instructor,
+    //   price,
+    //   seat,
+    //   email
+    // }
 
     axios.patch(`http://localhost:5000/classes/${cd._id}`).then(res => {
       const data = res.data
       console.log(data)
-      refetch()
+      if (data.modifiedCount) {
+        refetch()
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: `${cd.name} class approved!`,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
     })
   }
 
@@ -88,7 +99,7 @@ const ManageClasses = () => {
                   </tr>
                 </thead>
                 <tbody className='divide-y divide-gray-200 dark:divide-gray-700'>
-                  {classData.map(cd => (
+                  {allClass.map(cd => (
                     <tr key={cd._id}>
                       <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200'>
                         <img src={cd.photo} alt='' />
@@ -137,7 +148,7 @@ const ManageClasses = () => {
                             type='button'
                             onClick={() => handlePending(cd)}
                             title='Approve Class?'
-                            disabled={cd.status == 'pending'}
+                            disabled={cd.status == 'approved'}
                             className='hover:scale-110 py-3 px-4 inline-flex justify-center items-center gap-2 -ml-px first:rounded-l-lg first:ml-0 last:rounded-r-lg border font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all text-sm dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400'
                           >
                             {cd.status == 'pending' ? (

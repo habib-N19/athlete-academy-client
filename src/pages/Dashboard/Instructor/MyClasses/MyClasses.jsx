@@ -17,7 +17,7 @@ const MyClasses = () => {
         console.log(data)
         setClasses(data)
       })
-  }, [classes])
+  }, [])
   const handleUpdate = id => {
     console.log(id)
   }

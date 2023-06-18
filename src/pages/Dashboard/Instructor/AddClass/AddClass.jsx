@@ -29,7 +29,7 @@ const AddClass = () => {
       seatAmount,
       instructorName,
       photo,
-      instructorEmail
+      email
     } = data
     const newClass = {
       name: className,
@@ -39,7 +39,7 @@ const AddClass = () => {
       photo,
       seat: parseFloat(seatAmount),
       instructor: instructorName,
-      email: instructorEmail
+      email
     }
     axios.post('http://localhost:5000/classes', newClass).then(data => {
       if (data.data.insertedId) {
@@ -119,8 +119,8 @@ const AddClass = () => {
             />
             <input
               type='email'
-              name='instructorEmail'
-              {...register('instructorEmail', { required: true })}
+              name='email'
+              {...register('email', { required: true })}
               className='block w-full px-4 py-3 text-sm border-gray-200 rounded-md pointer-events-none opacity-70 bg-gray-50 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
               defaultValue={user.email}
               readOnly
